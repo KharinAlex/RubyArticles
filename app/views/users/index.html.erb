@@ -1,0 +1,23 @@
+<% provide(:title, "Users") %>
+
+<table width="30%">
+	<tr>
+		<td>ID</td>
+		<td>Name</td>
+		<td>Email</td>
+		<td>Actions</td>
+	</tr>
+	<% @users.each do |user| %>
+		<tr>
+			<td><%= user.id %></td>
+			<td><%= user.name %></td>
+			<td><%= user.email %></td>
+			<td>
+				<%= link_to "Edit", edit_user_path(user), {class: 'btn btn-success navbar-btn'} %>
+				<%= link_to "Delete", user_path(user), {class: 'btn btn-danger navbar-btn', confirm: 'Are you sure?'}%>
+			</td>
+		<tr>
+	<% end %>
+</table>
+
+<%= link_to "Create new user", {action: 'new'}, {class: 'btn btn-primary navbar-btn'} %>
