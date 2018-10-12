@@ -1,0 +1,14 @@
+<% provide(:title, "News") %>
+
+
+<% @articles.each do |article| %>
+	<div class="well">
+		<h3><%= link_to article.title, article_path(article) %></h3>
+		<h5><%= article.created_at %></h5>
+		<h5><%= User.find(article.user_id).name %></h5>
+	</div>
+<% end %>
+
+<div class="well">
+	<%= link_to "To create new article press here..", new_article_path, {class: 'btn btn-info'} %>
+</div>

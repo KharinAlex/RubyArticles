@@ -21,8 +21,8 @@
       			<li <% if params[:controller]=="home" &&  params[:action]=="index" %>class="active"<% end %>>
       				<%= link_to "Home", {controller: 'home', action: 'index'} %>
       			</li>
-      			<li <% if params[:controller]=="news" %>class="active"<% end %>>
-					<%= link_to "News", {controller: 'news', action: 'index'} %>
+      			<li <% if params[:controller]=="articles" %>class="active"<% end %>>
+					<%= link_to "News", {controller: 'articles', action: 'index'} %>
       			</li>
       			<li <% if params[:controller]=="home" &&  params[:action]=="about"%>class="active"<% end %>>
       				<%= link_to "About", {controller: 'home', action: 'about'} %>

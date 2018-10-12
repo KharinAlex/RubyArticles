@@ -1,0 +1,12 @@
+<% provide(:title, "Edit comment") %>
+
+<div class="container">
+  <div class="jumbotron">
+	<%= form_with(model: @comment, local: true) do |f| %>
+	  <%= f.label :content %>
+  	  <%= f.text_area :content %><br><br>
+
+	  <%= f.submit "Update", class: "btn btn-primary" %>
+	<% end %>    
+  </div>
+</div>
