@@ -12,21 +12,26 @@ services:
     ports:
       - "5432:5432"
   app:
+    restart: always
     build:
       context: .
       dockerfile: ./docker_conf/Dockerfile.app
-    command: "rails server --port 3000 --binding=0.0.0.0"
+    command: "rails server webrick --port 3000 --binding=0.0.0.0"
     depends_on:
       - db
     container_name: app1
     volumes:
       - ./:/ruby_test
     environment:
-      DATABASE_URL: postgres://postgres@db
+      - DB_USER=postgres
+      - DB_PASS=postgres
+      - DB_HOST=database
     expose:
       - "3000"
     ports:
       - "3000:3000"
+    links:
+    - db:database
 volumes:
   postgresql:
 

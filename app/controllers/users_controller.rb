@@ -27,10 +27,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update(user_params)
       redirect_to users_path
-      flash[:notice] = "Edit successfull"
-      flash[:color]= "valid"
+      flash[:success] = "Edit successfull"
     else
       render 'edit'
+      flash[:error] = "Edit failed"
     end
   end
 
@@ -38,13 +38,12 @@ class UsersController < ApplicationController
   	@user = User.new(user_params)
 
   	if @user.save
-  	  flash[:notice] = "You Signed up successfully"
-      flash[:color]= "valid"
+      redirect_to users_path
+  	  flash[:success] = "User created successfully"
     else
-      flash[:notice] = "Form is invalid"
-      flash[:color]= "invalid"
+      redirect_to new_user_path
+      flash[:error] = "Form is invalid"
   	end
-  	redirect_to users_path
   end
 
   private

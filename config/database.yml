@@ -20,10 +20,14 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  url : <%= ENV.fetch("DATABASE_URL") %>
+  port: "<%= ENV['DB_PORT'] || 5432 %>"
+  database: "<%= ENV['DB_NAME'] %>"
+  username: "<%= ENV['DB_USER'] %>"
+  password: "<%= ENV['DB_PASS'] %>"
+  host: "<%= ENV['DB_HOST'] %>"
 
 development:
-  database: ruby_test_development
+  <<: *default
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
