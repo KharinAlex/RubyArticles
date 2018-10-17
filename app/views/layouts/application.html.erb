@@ -15,22 +15,26 @@
   	<nav class="navbar navbar-inverse">
   		<div class="container-fluid">
     		<div class="navbar-header">
-      			<a class="navbar-brand">Profile</a>
+      			<a class="navbar-brand" href="<% if current_user %> <%= profile_path %> <% else %>#<% end %>">Profile</a>
     		</div>
     		<ul class="nav navbar-nav">
       			<li <% if params[:controller]=="home" &&  params[:action]=="index" %>class="active"<% end %>>
-      				<%= link_to "Home", {controller: 'home', action: 'index'} %>
+      				<%= link_to "Home", home_index_path %>
       			</li>
       			<li <% if params[:controller]=="articles" %>class="active"<% end %>>
-					<%= link_to "News", {controller: 'articles', action: 'index'} %>
+					<%= link_to "News", articles_path %>
       			</li>
       			<li <% if params[:controller]=="home" &&  params[:action]=="about"%>class="active"<% end %>>
-      				<%= link_to "About", {controller: 'home', action: 'about'} %>
+      				<%= link_to "About", home_about_path %>
       			</li>
     		</ul>
     		<div class="nav navbar-nav navbar-right">
-      			<%= link_to "Users", {controller: 'users', action: 'index'}, {class: 'btn btn-primary navbar-btn'} %>
-      		</div>
+          <% if not current_user %>
+      			<%= link_to "Log In", login_path, {class: 'btn btn-primary navbar-btn'} %>
+          <% else %>
+            <%= link_to "Log Out", logout_path, method: :delete, class: 'btn btn-primary navbar-btn' %>
+          <% end %>
+      	</div>
   		</div>
 	  </nav>
       <% flash.each do |key, value| %>

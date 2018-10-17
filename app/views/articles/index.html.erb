@@ -9,6 +9,8 @@
 	</div>
 <% end %>
 
-<div class="well">
-	<%= link_to "To create new article press here..", new_article_path, {class: 'btn btn-info'} %>
-</div>
+<% if current_user %>
+	<div class="well">
+		<%= link_to "To create new article press here..", new_article_path, {class: 'btn btn-info'} %>
+	</div>
+<% end %>

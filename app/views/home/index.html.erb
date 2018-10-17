@@ -1,2 +1,7 @@
 <% provide(:title, "Home page") %>
 <p>This is home page</p>
+<% if current_user %>
+	<p>Welcome, <%= current_user.name %>!</p>
+<% else %>
+	<p>Sign In to gain access to more functionality</p>
+<% end %>

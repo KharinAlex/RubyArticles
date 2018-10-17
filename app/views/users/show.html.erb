@@ -1,5 +1,49 @@
-<% provide(:title, "Users") %>
-<%= @user.id %>
-<%= @user.name %>
-<%= @user.email %>
-<hr>
+<% provide(:title, "User Profile") %>
+
+<div class="container-fluid well span6" style="width:80%;">
+	<div class="row-fluid">
+        <div class="span8">
+            <h3><%= @user.name %></h3>
+            <% if @user.first_name %> 
+				<h6>First name: <%= @user.first_name %></h6>
+			<% end %>
+            <% if @user.last_name %> 
+				<h6>Last name: <%= @user.last_name %></h6>
+			<% end %>
+            <h6>Email: <%= @user.email %></h6>
+			<% if @user.country %> 
+				<h6>Country: <%= @user.country %></h6>
+			<% end %>
+            <% if @user.birthday %> 
+				<h6>Birthday: <%= @user.birthday %></h6>
+			<% end %>
+            <% if @user.about %> 
+				<h6>About: <%= @user.about %></h6>
+			<% end %>
+			<h6>Registration date: <%= @user.created_at %></h6>
+        </div>
+
+        <div class="dropdown" align="right">
+            <div class="btn-group">
+                <a class="btn dropdown-toggle btn-info" data-toggle="dropdown" href="#">
+                    Action
+                    <span class="glyphicon glyphicon-cog"></span>
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                	<li>
+                    	<%= link_to "Modify profile", profile_edit_path, {class: 'btn btn-success navbar-btn'} %>
+                    </li>
+                    
+                    <li>
+                    	<%= link_to "Change password", edit_password_path, {class: 'btn btn-success navbar-btn'} %>
+                    </li>
+
+                    <li>
+                    	<%= link_to "Delete", profile_path, method: :delete, class: 'btn btn-danger navbar-btn', data: { confirm: 'Are you sure?' } %>
+                	</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

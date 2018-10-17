@@ -9,9 +9,6 @@
 	  <%= f.label :content %>
 	  <%= f.text_area :content %><br><br>
 
-	  <%= f.label :user_id %>
-	  <%= f.select :user_id, User.pluck(:id) %><br><br>
-
 	  <%= f.submit "Update", class: "btn btn-primary" %>
 	<% end %>    
   </div>
