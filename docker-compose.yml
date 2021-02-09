@@ -7,6 +7,10 @@ services:
     container_name: db1
     volumes:
       - postgresql:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER:=postgres
+      - POSTGRES_DB=ruby_test_dev
     expose:
       - "5432"
     ports:
