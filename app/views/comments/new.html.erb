@@ -1,0 +1,14 @@
+<% provide(:title, "Creating new comment") %>
+
+<div class="container">
+  <div class="jumbotron">
+	<%= form_for(@comment) do |f| %>
+	  <%= f.label :content %>
+	  <%= f.text_area :content %><br><br>
+	  
+	  <%= f.hidden_field :article_id, :value => params[:article_id] %>
+
+	  <%= f.submit "Create", class: "btn btn-primary" %>
+	<% end %>  
+  </div>
+</div>

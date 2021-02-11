@@ -1,0 +1,54 @@
+<% provide(:title, "Article") %>
+
+<div class="container">
+  <div class="jumbotron">
+    <h3 class="test-info" align="center"><%= @article.title %></h3>
+    <h5 class="test-info">Published: <%= @article.created_at %> by <%= User.find(@article.user_id).name %></h5>
+    <%= @article.content %><br>
+    <h5 align="right">
+      <% if current_user %>
+        <%= link_to new_comment_path(article_id: @article.id) do %>
+		      <i class="glyphicon glyphicon-comment"></i> 
+	      <% end %>
+      <% end %>
+        
+      <% if current_user && (current_user.id == @article.user_id || current_user.is_staff) %>
+        <%= link_to edit_article_path(@article) do %>
+		      <i class="glyphicon glyphicon-edit"></i> 
+	      <% end %>     
+      
+        <%= link_to article_path(@article), method: :delete, data: { confirm: 'Are you sure?' } do %>
+		      <i class="glyphicon glyphicon-remove"></i> 
+	      <% end %>
+      <% end %> 
+    </h5>
+  </div>
+</div>
+<div class="container">
+  <h3 class="test-info" align="center">Comment section</h3>
+  <% if current_user %>  
+    <% if @comments.exists? == false %>
+      <h4 align="center" class="test-info">There is no comments for this article yet...</h4>
+    <% else %>
+      <% @comments.each do |comment| %>
+        <div class="jumbotron">
+          <%= comment.content %>
+          <h6 class="test-info" align="right">Published: <%= comment.created_at %> by <%= User.find(comment.user_id).name %></h6>
+          <% if current_user && (current_user.id == comment.user_id || current_user.is_staff) %>
+            <h5 align="right">
+              <%= link_to edit_comment_path(comment) do %>
+                <i class="glyphicon glyphicon-edit"></i> 
+              <% end %>
+        
+              <%= link_to comment_path(comment), method: :delete, data: { confirm: 'Are you sure?' } do %>
+                <i class="glyphicon glyphicon-remove"></i> 
+              <% end %>
+            </h5>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  <% else %>
+    <h4 align="center" class="test-info">This section is visible only for users</h4>
+  <% end %>
+</div>

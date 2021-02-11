@@ -1,11 +1,7 @@
 class UsersController < ApplicationController
-  
-  def index
-  	@users = User.all
-  end
+  before_action :require_login, :get_instance, except: [:new, :create]
 
   def show
-  	@user = User.find(params[:id])
   end
 
   def new
@@ -13,24 +9,21 @@ class UsersController < ApplicationController
   end
 
   def edit
-  	@user = User.find(params[:id])
   end
 
   def destroy
-    @user = User.find(params[:id])
-    @user.destroy
-
-    redirect_to users_path
+    current_user.destroy
+    log_out
+    redirect_to home_index_path
   end
 
   def update
-    @user = User.find(params[:id])
-    if @user.update(user_params)
-      redirect_to users_path
+    if current_user.update(user_params)
+      redirect_to profile_path
       flash[:success] = "Edit successfull"
     else
       render 'edit'
-      flash[:error] = "Edit failed"
+      flash[:danger] = "Edit failed"
     end
   end
 
@@ -38,18 +31,42 @@ class UsersController < ApplicationController
   	@user = User.new(user_params)
 
   	if @user.save
-      redirect_to users_path
-  	  flash[:success] = "User created successfully"
+      log_in(@user)
+      redirect_to profile_path
+  	  flash[:success] = "User created successfully. Please, edit your profile"
     else
       redirect_to new_user_path
-      flash[:error] = "Form is invalid"
+      flash[:danger] = "Form is invalid"
   	end
   end
 
-  private
+  def edit_password 
+  end
+
+  def update_password
+    if @user.password == params[:old_password] && @user.update(params.permit(:password))
+      redirect_to profile_path
+      flash[:success] = "Edit successfull"
+    else
+      render 'edit_password'
+      flash[:danger] = "Incorrect password"
+    end
+  end
+  
+private
+
+  def require_login
+    if !current_user
+      redirect_to login_path
+    end
+  end
+
+  def get_instance
+    @user = current_user
+  end
 
   def user_params
-    params.require(:user).permit(:name, :email, :password)
+    params.require(:user).permit(:name, :email, :password, :first_name, :last_name, :country, :about, :birthday, :is_staff)
   end
 
 end

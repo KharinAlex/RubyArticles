@@ -1,14 +1,19 @@
 <% provide(:title, "Creating new user") %>
+<div class="container-fluid well span6" style="width:80%;">
+	<div class="row-fluid">
+        <div class="span8">
+			<%= form_for(@user) do |f| %>
+			  <%= f.label :name %>
+			  <%= f.text_field :name %><br><br>
 
-<%= form_for(@user) do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
+			  <%= f.label :email %>
+			  <%= f.email_field :email %><br><br>
 
-  <%= f.label :email %>
-  <%= f.email_field :email %>
+			  <%= f.label :password %>
+			  <%= f.password_field :password %><br><br>
 
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-
-  <%= f.submit "Create", class: "btn btn-primary" %>
-<% end %>
+			  <%= f.submit "Create", class: "btn btn-primary" %>
+			<% end %>
+		</div>
+	</div>
+</div>

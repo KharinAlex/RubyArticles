@@ -1,0 +1,15 @@
+<% provide(:title, "Edit article") %>
+
+<div class="container">
+  <div class="jumbotron">
+	<%= form_with(model: @article, local: true) do |f| %>
+	  <%= f.label :title %>
+	  <%= f.text_field :title %><br><br>
+
+	  <%= f.label :content %>
+	  <%= f.text_area :content %><br><br>
+
+	  <%= f.submit "Update", class: "btn btn-primary" %>
+	<% end %>    
+  </div>
+</div>
